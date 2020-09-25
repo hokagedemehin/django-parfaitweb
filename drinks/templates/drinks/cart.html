@@ -1,0 +1,146 @@
+{% extends 'drinks/main.html' %}
+{% load static %}
+{%block title%}
+Cart
+{%endblock title%}
+
+{% block content %}
+<div class="container tw-mt-32">
+    <a href="{% url 'store' %}" class="btn btn-outline-info tw-rounded-full tw-text-xl">
+        <i class="fas fa-long-arrow-alt-left fa-sm  "></i><span class="ml-2 tw-text-base md:tw-text-lg tw-font-bold">Continue Shopping</span>
+        
+    </a>
+</div>
+
+<br>
+
+<table class="container">
+    <tr class="px-4">
+        <th class="">
+            <h3 class="tw-text-lg md:tw-text-2xl tw-ml-2">Items: <strong>{{order.get_cart_items}}</strong></h3>
+        </th>
+        <th>
+            <h3 class="tw-text-lg md:tw-text-2xl">Total: <strong>&#x20A6;{{order.get_cart_total | floatformat:2}}</strong></h3>
+        </th>
+        <th>
+            <a href="{% url 'checkout' %}" class="btn btn-success tw-rounded-full tw-float-right tw-text-sm md:tw-text-lg tw-font-bold tw-mr-2"> Check out</a>
+        </th>
+    </tr>
+</table>
+<br>
+<hr>
+<br>
+
+<!-- class="row row-cols-1 row-cols-md-3 mt-4 mx-2 md:mx-8" -->
+<div class=" container-fluid tw-mt-6 sm:tw-mt-20 ">
+    <div class="row row-cols-1 row-cols-sm-4 tw-hidden sm:tw-flex sm:tw-justify-center sm:tw-items-center">
+        <div class="col tw-mb-4 tw-flex tw-justify-center tw-items-center"><span></span></div>
+        <div class="col tw-mb-4 tw-flex tw-justify-center tw-items-center tw-text-2xl tw-font-bold"><span>Items</span></div>
+        <div class="col tw-mb-4 tw-flex tw-justify-center tw-items-center tw-text-2xl tw-font-bold">
+            <div class="tw-w-full tw-flex tw-justify-evenly">
+                <span>Price</span>
+                <span>Quantity</span>
+            </div>
+        </div>
+        <div class="col tw-mb-4 tw-flex tw-justify-center tw-items-center tw-text-2xl tw-font-bold"><span>Total</span></div>
+    </div>
+   
+</div>
+
+<hr>
+<br>
+
+{% for item in items%}
+<div class="container-fluid">
+    <div class="row row-cols-1 row-cols-sm-4 tw-flex tw-justify-center tw-items-center">
+        <div class="col tw-mb-4 tw-flex tw-justify-center tw-items-center">
+            <img src="{% if item.product.imageURL == '' %} https://via.placeholder.com/500x300/DCDCDC/FFF?text=Dharmie+Parfait {%else%} {{item.product.imageURL}} {%endif%}" style="border-radius: 10%;" class="tw-w-1/3 h-25 tw-object-cover" alt="...">
+        </div>
+        <div class="col tw-mb-4 tw-flex tw-justify-center tw-items-center tw-text-2xl tw-font-bold">
+            <div>
+                <div><span>{{item.product.name}}</span></div>
+                <div class="tw-font-normal tw-text-base"><span>{{item.product.records}} left</span></div>
+            </div>
+        </div>
+        <div class="col tw-mb-4 tw-flex tw-justify-center tw-items-center tw-text-xl tw-font-bold">
+            <div class="tw-w-full tw-flex tw-justify-evenly">
+                <span class="tw-pr-10">&#x20A6;{{item.product.price | floatformat:2}}</span>
+                <div class="tw-w-1/6 tw-flex tw-justify-evenly ">
+                    <p>{{item.quantity}}</p>
+                    <div class="tw-flex tw-flex-col tw-justify-center">
+                        <i data-product="{{item.product.id}}" data-action="add" data-record="{{item.product.records}}" class="fas fa-caret-up fa-lg tw-cursor-pointer update-cart"></i>
+                        <i data-product="{{item.product.id}}" data-action="remove" data-record="{{item.product.records}}" class="fas fa-caret-down fa-lg tw-cursor-pointer update-cart"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col tw-mb-4 tw-flex tw-justify-center tw-items-center tw-text-xl tw-font-bold">
+            <span>&#x20A6;{{item.get_total}}</span>
+            <span class="tw-pl-2">
+                <svg class="tw-w-4 tw-cursor-pointer update-cart" data-product="{{item.product.id}}" data-action="clear" data-record="{{item.product.records}}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+            </span>
+        </div>
+    </div>
+</div>
+
+<hr>
+<br>
+
+{% endfor %}
+<!-- <div class="container-fluid">
+    <div class="row row-cols-1 row-cols-sm-4 tw-flex tw-justify-center tw-items-center">
+        <div class="col tw-mb-4 tw-flex tw-justify-center tw-items-center">
+            <img src="https://via.placeholder.com/500x300/DCDCDC/FFF?text=Dharmie+Parfait" style="border-radius: 10%;" class="tw-w-2/5 tw-object-cover" alt="...">
+        </div>
+        <div class="col tw-mb-4 tw-flex tw-justify-center tw-items-center tw-text-xl tw-font-bold">
+            <span>Parfait 2</span>
+        </div>
+        <div class="col tw-mb-4 tw-flex tw-justify-center tw-items-center tw-text-xl tw-font-bold">
+            <div class="tw-w-full tw-flex tw-justify-evenly">
+                <span class="tw-pr-10">N 2000</span>
+                <div class="tw-w-1/6 tw-flex tw-justify-evenly ">
+                    <p>2</p>
+                    <div class="tw-flex tw-flex-col">
+                        <i class="fas fa-caret-up fa-lg tw-cursor-pointer"></i>
+                        <i class="fas fa-caret-down fa-lg tw-cursor-pointer"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col tw-mb-4 tw-flex tw-justify-center tw-items-center tw-text-xl tw-font-bold">
+            <span>4000</span>
+        </div>
+    </div>
+</div> -->
+
+    
+{% endblock content %}
+
+<!-- <div class="box-elements">
+    <div class="cart-row">
+        <div style="flex:2"></div>
+        <div style="flex:2"><strong>Item</strong></div>
+        <div style="flex:1"><strong>Price</strong></div>
+        <div style="flex:1"><strong>Quantity</strong></div>
+        <div style="flex:1"><strong>Total</strong></div>
+    </div>
+    {%for item in items%}
+    <div class="cart-row">
+        <div style="flex:2"><img src="{% if item.product.imageURL == '' %} {%static 'images/empty.png'%} {%else%} {{item.product.imageURL}} {%endif%}" alt="product images" class="row-image"></div>
+        <div style="flex:2"><p>{{item.product.name}}</p></div>
+        <div style="flex:1"><p>N{{item.product.price | floatformat:2}}</p></div>
+        <div style="flex:1">
+            <p class="quantity">{{item.quantity}}</p>
+            <div class="quantity">
+                <img data-product="{{item.product.id}}" data-action="add" src="{%static 'images/arrow-up.png'%}" alt="" class="chg-quantity update-cart">
+                <img data-product="{{item.product.id}}" data-action="remove" src="{%static 'images/arrow-down.png'%}" alt="" class="chg-quantity update-cart">
+            </div>
+        </div>
+        <div style="flex:1"><p>N{{item.get_total}}</p></div>
+    </div>
+    {%endfor%}
+</div> -->

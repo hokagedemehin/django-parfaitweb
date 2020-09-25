@@ -1,0 +1,17 @@
+{% extends 'drinks/main.html' %}
+{% load static %}
+{%block title%}
+Delete Parfait
+{%endblock title%}
+
+{% block content %}
+<form action="{% url 'parfait-delete' product.slugProduct %}" method="post" class="container">
+    <legend class="tw-mt-32 tw-font-bold">Delete Order</legend>
+    <hr>
+    <p class="tw-my-5 tw-text-lg">Are you sure you want to delete <strong>"{{product.name}}"</strong></p>
+    {% csrf_token %}
+
+    <a class="btn btn-warning tw-rounded-full" href="{% url 'parfait' %}">Cancel</a>
+    <input type="submit" value="Confirm" class="btn btn-danger tw-rounded-full">
+</form>
+{% endblock content%}

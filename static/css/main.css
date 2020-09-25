@@ -1,0 +1,11 @@
+.social-icons a{
+    text-decoration: none;
+}
+
+.social-icons a:hover{
+    color: white;
+}
+
+.nav-link:active {
+    color: blue;
+}

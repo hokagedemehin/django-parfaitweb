@@ -1,0 +1,15 @@
+{% extends 'drinks/main.html' %}
+{% load static %}
+{%block title%}
+Access Denied
+{%endblock title%}
+
+{% block content %}
+<div class="jumbotron tw-mt-48 md:tw-w-1/2 tw-mx-auto " >
+    <h1 class="display-4 tw-font-bold" >Access Denied !!!</h1>
+    <p class="lead tw-font-medium">You are not authorized to view this page. Thank you for understanding</p>
+    <hr class="my-4">
+    <p>Please click the link below to return back to the homepage</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'store' %}" role="button">Back to site</a>
+  </div>
+{% endblock content%}

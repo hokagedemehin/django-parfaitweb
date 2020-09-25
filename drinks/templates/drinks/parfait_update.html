@@ -1,0 +1,104 @@
+{% extends 'drinks/main.html' %}
+{% load static %}
+{%block title%}
+Update Parfait
+{%endblock title%}
+
+{% block content %}
+<!-- <form action="" method="post">
+    <legend class="tw-mt-32">Update Parfait</legend>
+    <hr>
+    {% csrf_token%}
+    <div class="container">
+        {{form.as_p}}
+        <input type="submit" value="Submit" name="Submit" class="btn btn-success">
+    </div>
+    
+    
+</form> -->
+
+<div class="container tw-mt-32">
+    <!-- <div class="">
+        <div class="">
+            <legend class="">Create New Parfait</legend>
+            <hr>
+            <br>
+            <form action="" method="post">
+               
+                {% csrf_token%}
+                <div class="col-12">
+                    {{form.as_p}}
+                    <div>
+                        <div class="tw-mb-2">
+                            <span>Name:  </span>
+                            <div>{{form.name}}</div>
+                        </div>
+                        <div class="tw-mb-2">
+                            <span>Price: </span>
+                            <div>{{form.price}}</div>
+                        </div>
+                        <div class="tw-mb-2">
+                            <span>Digital: </span>
+                            <div>{{form.digital}}</div>
+                        </div>
+                        <div class="tw-mb-2">
+                            <span>Description: </span>
+                            <div>{{form.description}}</div>
+                        </div>
+                        <div class="tw-mb-2">
+                            <span>Full Description: </span>
+                            <div>{{form.full_description}}</div>
+                        </div>
+                        <div class="tw-mb-2">
+                            <span>Image: </span>
+                            <div>{{form.image}}</div>
+                        </div>
+                        <div class="tw-mb-2">
+                            <span>Records: </span>
+                            <div>{{form.records}}</div>
+                        </div>
+                        <div class="tw-mb-2">
+                            <span>Stock: </span>
+                            <div>{{form.stock}}</div>
+                        </div>
+                        <div class="tw-mb-4">
+                            <span>Slug Product: </span>
+                            <div>{{form.slugProduct}}</div>
+                        </div>
+                    </div>
+                    <input type="submit" value="Submit" name="Submit" class="btn btn-success tw-mb-4">
+                </div>
+                
+            </form>
+            
+        </div>
+       
+    </div> -->
+
+     <div class="">
+            <legend class="tw-font-bold">Update {{name}}</legend>
+            <hr>
+            <br>
+            <form action="" method="post" enctype="multipart/form-data">
+               
+                {% csrf_token%}
+                <div class="col-12">
+                    {% for field in form %}
+                        <div class="fieldWrapper">
+                            {{ field.errors }}
+                            <span class="tw-text-lg">{{ field.label_tag }} </span>
+                            <div class="tw-mb-3">{{ field }}</div>
+                            {% if field.help_text %}
+                            <p class="help">{{ field.help_text|safe }}</p>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <input type="submit" value="Submit" name="Submit" class="btn btn-success tw-mb-4">
+                </div>
+                
+            </form>
+            
+        </div>
+    
+</div>
+{% endblock content%}

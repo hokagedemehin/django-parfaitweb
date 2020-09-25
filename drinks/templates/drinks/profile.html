@@ -1,0 +1,29 @@
+{% extends 'drinks/main.html' %}
+{% load static %}
+{%block title%}
+Profile
+{%endblock title%}
+
+{% block content %}
+<div class="tw-mt-24"></div>
+<div class="row">
+    <div class="col-md-3 ml-2 mr-2 mb-2">
+        <div class="card card-body">
+            <a href="{% url 'store' %}" class="btn btn-warning">&#8592; Back to Profile</a>
+            <hr>
+            <h3 style='text-align: center'>Account Settings</h3>
+            <hr>
+            <img src="{{request.user.customer.profile_pic.url}}" alt="" class="profile-pic1">
+        </div>
+    </div>
+    <div class="col-md-5 ml-2 mr-2">
+        <div class="card card-body">
+            <form action="" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-primary" value="Update Information">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content%}

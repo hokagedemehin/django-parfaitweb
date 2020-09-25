@@ -1,0 +1,290 @@
+{% extends 'drinks/main.html' %}
+{% load static %}
+{%block title%}
+Check out
+{%endblock title%}
+
+{% block content %}
+<div class="container-fluid tw-mt-32" >
+    <div class="row row-cols-1 row-cols-md-3 tw-flex tw-justify-center tw-mx-1 ">
+        <div class="col tw-bg-white tw-mb-4 tw-p-6 md:tw-mr-8 tw-shadow-md" style="border-radius: 2rem; height: fit-content;">
+            <div id="form-wrapper">
+              <form id="form">
+                {%csrf_token%}
+                <div class="form-row " id="user-info">
+                    <div class="form-group col-md-6 ">
+                        <label for="inputName">Name</label>
+                        <input type="text"  name="name" class="form-control" id="inputName" placeholder="Full Name...">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Email</label>
+                        <input type="email" name="email"  class="form-control" id="inputEmail4" placeholder="example@email.com">
+                    </div>
+                </div>
+                <hr>
+                <br>
+                <div id="shipping-info">
+                  <div class="form-group col">
+                    <strong>Shipping Address</strong>
+                  </div>
+                  <hr>
+                  <br>
+                  <div class="form-group">
+                      <label for="inputAddress">Address</label>
+                      <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main St">
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputCountry">Country</label>
+                        <input type="text" class="form-control" id="inputCountry" name="country">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputState">State</label>
+                        <input type="text" class="form-control" id="inputState" name="state">
+                      </div>
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputCity">City</label>
+                        <input type="text" class="form-control" id="inputCity" name="city">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputZipCode">ZipCode</label>
+                        <input type="text" class="form-control" id="inputZipCode" name="zipcode">
+                      </div>
+                  </div>
+                </div>
+                
+                <input type="submit" class="btn btn-success tw-rounded-full " id="form-button" value="Continue">
+            </form>
+            </div>
+            <br>
+            <hr>
+            <div class="tw-hidden" id="payment-info">
+              <small>PayPal Option</small>
+              <div id="paypal-button-container"></div>
+              <!-- <button type="submit" id="make-payment" class="btn btn-outline-success tw-rounded-full">Make Payment</button> -->
+            </div>
+        </div>
+        
+        <div class="col tw-bg-white tw-mb-4 tw-p-6 tw-shadow-md" style="border-radius: 2rem; height: fit-content;">
+            <form>
+              <div class="form-group">
+                <a href="{% url 'cart' %}" class="btn btn-outline-info tw-rounded-lg tw-text-xl">
+                  <i class="fas fa-long-arrow-alt-left fa-md  "></i><span class="ml-2 tw-rounded-full">Back to Cart</span>
+              </a>
+              </div>
+              <hr>
+              <br>
+              
+              <div class="form-group">
+                <h2>Order Summary</h2>
+              </div>
+              <hr>
+              <br>
+
+              {% for item in items%}
+              <div class="form-row">
+                <div class="form-group col-3">
+                  <div class="">
+                    <img src="{% if item.product.imageURL == '' %} https://via.placeholder.com/500x300/DCDCDC/FFF?text=Dharmie+Parfait {%else%} {{item.product.imageURL}} {%endif%}" style="border-radius: 10%;" class="tw-w-1/2 tw-object-cover" alt="...">
+                  </div>
+                </div>
+                <div class="form-group col-3">
+                  <div class="">
+                    <span>{{item.product.name}}</span>
+                  </div>
+                </div>
+                <div class="form-group col-3">
+                  <div class="">
+                    <span>&#x20A6;{{item.get_total}}</span>
+                  </div>
+                </div>
+                <div class="form-group col-3">
+                  <div class="tw-flex tw-justify-center md:tw-justify-end lg:tw-justify-center">
+                    <span>X{{item.quantity}}</span>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <br>
+              {% endfor%}
+              <div class="form-row">
+                <div class="col-6 tw-flex tw-justify-center">
+                  Items: <strong class="tw-px-1">{{order.get_cart_items}}</strong>
+                </div>
+                <div class="col-6">
+                  Total: <strong>&#x20A6;{{order.get_cart_total | floatformat:2}}
+                </div>
+              </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AatM1zPgaCzuE0pYBc6p20cP_56s90xB6T2yPZSM4agJgWyajOY1OxUFk9KUZC-aygTEz4sh0oCy10Es&currency=USD&disable-funding=credit"></script>
+
+<script>
+  var total = '{{order.get_cart_total}}'
+  // Render the PayPal button into #paypal-button-container
+  paypal.Buttons({
+      style: {
+          color: 'gold',
+          shape: 'pill',
+          size: 'responsive'
+      },
+      // Set up the transaction
+      createOrder: function(data, actions) {
+          return actions.order.create({
+              purchase_units: [{
+                  amount: {
+                      value: parseFloat(total).toFixed(2)
+                  }
+              }]
+          });
+      },
+
+      // Finalize the transaction
+      onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+              // Show a success message to the buyer
+              submitFormData()
+              
+          });
+      }
+
+
+  }).render('#paypal-button-container');
+</script>
+
+<script type="text/javascript"> 
+  var shipping = '{{order.shipping}}'
+  var total = '{{order.get_cart_total}}'
+  if (shipping == 'False') {
+      document.getElementById('shipping-info').innerHTML = ''
+  }
+
+  if (user != 'AnonymousUser') {
+    document.getElementById('user-info').innerHTML = ''
+  }
+
+  if (shipping == 'False' && user != 'AnonymousUser') {
+    document.getElementById('form-wrapper').classList.add('tw-hidden');
+    document.getElementById('payment-info').classList.remove('tw-hidden')
+  }
+
+  var form = document.getElementById('form')
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log('button works');
+    document.getElementById('form-button').classList.add('tw-hidden');
+    document.getElementById('payment-info').classList.remove('tw-hidden');
+  });
+  // document.getElementById('make-payment').addEventListener('click', () => {
+    // submitFormData()
+  // })
+  function submitFormData(){
+    console.log('payment completed')
+    var userFormData = {
+      'name': null,
+      'email': null,
+      'total': total,
+    }
+    var shippingInfo = {
+      'address': null,
+      'city': null,
+      'state': null,
+      'zipcode': null,
+    }
+
+    if (shipping != 'False'){
+      shippingInfo.address = form.address.value;
+      shippingInfo.city = form.city.value;
+      shippingInfo.state = form.state.value;
+      shippingInfo.zipcode = form.zipcode.value;
+    }
+
+    if (user == 'AnonymousUser') {
+      userFormData.name = form.name.value;
+      userFormData.email = form.email.value;
+      shippingInfo.address = form.address.value;
+      shippingInfo.city = form.city.value;
+      shippingInfo.state = form.state.value;
+      shippingInfo.zipcode = form.zipcode.value;
+    }
+
+    console.log('shipping:', shippingInfo)
+    console.log('userform', userFormData)
+
+    var url = '/process-order/'
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken,
+      },
+      body: JSON.stringify({'form': userFormData, 'shipping': shippingInfo})
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('process success', data);
+      alert('Transaction completed');
+      cart = {}
+      document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+      window.location.href = "{% url 'store' %}"
+    })
+
+  }
+
+  
+</script>
+
+{% endblock content %}
+
+<!-- <form>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Email</label>
+        <input type="email" class="form-control" id="inputEmail4">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Password</label>
+        <input type="password" class="form-control" id="inputPassword4">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress">Address</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    </div>
+    <div class="form-group">
+      <label for="inputAddress2">Address 2</label>
+      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity">City</label>
+        <input type="text" class="form-control" id="inputCity">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">State</label>
+        <select id="inputState" class="form-control">
+          <option selected>Choose...</option>
+          <option>...</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Zip</label>
+        <input type="text" class="form-control" id="inputZip">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+          Check me out
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </form> -->

@@ -1,0 +1,1 @@
+web: gunicorn parfaitweb.wsgi --log-file -

@@ -1,0 +1,100 @@
+{% extends 'drinks/main.html' %}
+{% load static %}
+{%block title%}
+My Orders
+{%endblock title%}
+{% block content %}
+<div class="tw-mt-24"></div>
+{% include 'drinks/myorders.html'%}
+
+<div class="tw-bg-gray-200 tw-p-5 tw-text-center tw-mb-4 container-fluid" >
+    <form action="" method="get" id="searchForm">
+        {{myFilter.form}}
+        <button class="btn btn-primary tw-rounded-full" type="submit">Search</button>
+    </form>
+</div>
+<div class="tw-mx-2">
+    <div class="table-responsive">
+        <table class="table table-striped tw-mt-2"> <!-- could add table-sm-->
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#Transaction ID</th>
+                    <th scope="col">Order ID</th>
+                   
+                    <th scope="col">Date Ordered</th>
+                    <th scope="col">Order Item</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Complete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in orderItems%}
+                
+                <tr class="tw-font-bold tw-text-lg">
+                    <th scope="row">{{item.order.transaction_id}}</th>
+                    <td >{{item.order.id}}</td>
+                    
+                    <td>{{item.date_added | date:'M d, Y'}}</td>
+                    <td>{{item.product.name}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.get_total}}</td>
+                    <td>{{item.order.complete  }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+                
+        </table>
+        
+    </div>
+
+    <div class="container tw-flex tw-justify-center tw-text-lg tw-my-4">
+		
+		{% if orderItems.has_other_pages %}
+
+			<ul class="pagination">
+
+				{% if orderItems.has_previous %}
+					<li class="page-item tw-mr-1 "><a data-page="{{orderItems.previous_page_number}}" href="?page={{orderItems.previous_page_number}}" class="page-link">&laquo</a></li>
+
+					<li class="page-item tw-mr-1"><a data-page="1" href="?page=1" class="page-link  tw-rounded-md">First</a></li>
+                {% endif %}
+                
+                {% for i in orderItems.paginator.page_range %}
+					{% if orderItems.number == i %}
+						<li class="page-item active tw-mr-1 "><a class="page-link  tw-rounded-md">{{i}}</a></li>
+                    {%elif i > orderItems.number|add:'-3' and i < orderItems.number|add:'3' %}
+                        <li class="page-item tw-mr-1"><a data-page="{{i}}" href="?page={{i}}" class="page-link  tw-rounded-md">{{i}}</a></li>
+					{% endif %}
+					
+				{% endfor %}
+
+
+				{% if orderItems.has_next %}
+					<li class="page-item tw-mr-1"><a data-page="{{orderItems.paginator.num_pages}}" href="?page={{orderItems.paginator.num_pages}}" class="page-link  tw-rounded-md">Last</a></li>
+
+					<li class="page-item"><a data-page="{{orderItems.next_page_number}}" href="?page={{orderItems.next_page_number}}" class="page-link">&raquo</a></li>
+				{% endif %}
+			</ul>
+
+		{% endif %}
+    </div>
+</div>
+
+<script type="text/javascript">
+	let searchForm = document.getElementById('searchForm')
+	let pageLinks = document.getElementsByClassName('page-link')
+
+	for(var i=0; pageLinks.length > i; i++){
+
+		pageLinks[i].addEventListener('click', function(e){
+			e.preventDefault()
+			let page = this.dataset.page
+			console.log('Page:', page)
+			searchForm.innerHTML += `<input value="${page}" name="page" hidden >`
+			searchForm.submit()
+		})
+
+	}
+</script>
+{% endblock content%}

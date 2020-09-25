@@ -1,0 +1,89 @@
+{% load static%}
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light tw-bg-gray-500 tw-text-xl tw-font-bold tw-font-fam5">
+    <a href="{% url 'store' %}" class="navbar-brand">
+        <img src="{% static 'images/logo1.jpeg' %}" alt="" class="tw-w-12 tw-rounded-full md:tw-w-16" loading="lazy">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto ">
+        <li class="nav-item ">
+          <a class="nav-link active" aria-pressed="true" href="{% url 'store' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'parfait' %}">Parfait</a>
+        </li>
+        {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'orderslist' %}">All Orders</a>
+        </li>
+        {% endif %}
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'user-page' %}">My Orders</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+          <li class="nav-item">
+            <a href="{% url 'create-staff' %}" class="nav-link">New Staff</a>
+          </li>
+        {% endif %}
+          <li class="nav-item">
+              <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+          </li>
+          <li class="nav-item">
+              <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a href="{% url 'register' %}" class="nav-link">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'login' %}" class="nav-link">Login</a>
+          </li>
+        {% endif %}
+        
+          <li class="nav-item tw-flex tw-relative" style="width: fit-content;">
+              <a href="{% url 'cart'%}" class="nav-link"><svg class="tw-w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg></a>
+              <strong class="tw-bg-red-500 tw-w-6 tw-h-6 tw-text-center tw-rounded-full tw-absolute tw-right-0">{{cartItems}}</strong>
+          </li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <!-- <script type="text/javascript">
+    let links = document.querySelectorAll('.nav-link');
+    links.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        link.classList.toggle('active');
+        console.log(link , 'is active')
+      });
+    })
+    
+  </script> -->
+
+  <!-- <script type="text/javascript">
+    const links = document.querySelectorAll('.nav-item');
+    console.log(links)
+    links.forEach((navlink) => {
+      navlink.addEventListener('click', () => {
+        console.log(link , 'is active')
+      })
+    })
+    
+  </script>
+
+  <style>
+    .nav-link:active {
+        color: blue;
+    }
+</style> -->

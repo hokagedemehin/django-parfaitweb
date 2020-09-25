@@ -1,0 +1,81 @@
+{% extends 'drinks/main.html' %}
+{% load static %}
+{%block title%}
+Parfait Page
+{%endblock title%}
+
+{% block content %}
+<div class="tw-mt-24"></div>
+{% include 'drinks/dashboard.html'%}
+
+<div class="row tw-mx-1">
+    <div class=" col col-lg-5 tw-mb-2">
+            <div class="container tw-mb-5 tw-text-center tw-text-4xl md:tw-text-5xl tw-font-fam5 tw-font-black tw-text-yellow-600" id="parfait">
+                <h2>Customers</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped"> <!-- could add table-sm-->
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            {% for customer in customers%}
+                            
+                            <tr class="tw-font-bold tw-text-lg">
+                                <td><a href="{% url 'customers' customer.slugCustomer %}" class="btn btn-outline-info tw-rounded-full">View</a></td>
+                                <th scope="row">{{customer.name}}</th>
+                                <td class="">{{customer.email}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                </table>
+            </div>
+    </div>
+    <div class=" col col-lg-7">
+        <div class="container tw-text-center tw-text-4xl md:tw-text-5xl tw-font-fam5 tw-font-black tw-text-yellow-600" id="parfait">
+            <h2>Parfaits</h2>
+        </div>
+        <div>
+            <a href="{% url 'parfait-create' %}" class="btn btn-outline-success tw-rounded-full tw-mb-2">
+                <i class="fas fa-wine-glass fa-lg  "></i> <span>New Parfait</span>
+            </a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped"> <!-- could add table-sm-->
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Records</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        {% for product in products%}
+                        
+                        <tr class="tw-font-bold tw-text-lg">
+                            <th scope="row">{{product.id}}</th>
+                            <td ><img src="{{product.imageURL}}" class="tw-object-cover tw-h-20" style="border-radius: 10px;" alt=""></td>
+                            <td class="">{{product.name}}</td>
+                            <td>{{product.records}}</td>
+                            <td>{{product.stock}}</td>
+                            <td>{{product.price}}</td>
+                            <td><a href="{% url 'parfait-update' product.slugProduct %}" class="btn btn-outline-info tw-rounded-full">Update</a></td>
+                            <td><a href="{% url 'parfait-delete' product.slugProduct %}" class="btn btn-outline-danger tw-rounded-full">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}
