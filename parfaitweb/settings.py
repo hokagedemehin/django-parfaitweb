@@ -28,7 +28,9 @@ SECRET_KEY = '==731vmj4dl_-pgsaagg$-4+%e5ipr&zcvh%mdkzwlp+=9y6dv'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = ['dharmie-parfait.herokuapp.com', '127.0.0.1']
+# ALLOWED_HOSTS = ['dharmie-parfait.herokuapp.com', '127.0.0.1']
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
