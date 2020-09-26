@@ -152,6 +152,9 @@ GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
     os.path.join(BASE_DIR, 'credentials.json')
 )
 
+#######GOOGLE CLOUD STORAGE#####################
+###############################################################
+########################################################################
 ###configuration for media file storing and reriving media file from gcloud 
 DEFAULT_FILE_STORAGE = 'parfaitweb.gcloud.GoogleCloudMediaFileStorage'
 GS_PROJECT_ID = os.environ.get('GS_PROJECT_ID')
@@ -170,7 +173,7 @@ ADDED DJANGO_HEROKU IMPORT AT THE TOP AND CODE AT THE BOTTOM
 
 """
 
-DEBUG = False
+DEBUG = True
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
