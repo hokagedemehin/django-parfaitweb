@@ -160,8 +160,6 @@ GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
 ########################################################################
 ###configuration for media file storing and reriving media file from gcloud 
 DEFAULT_FILE_STORAGE = 'parfaitweb.gcloud.GoogleCloudMediaFileStorage'
-# GS_PROJECT_ID = os.environ.get('GS_PROJECT_ID')
-# GS_BUCKET_NAME = os.environ.get('GS_BUCKET_NAME')
 
 GS_PROJECT_ID = 'ibk-storages'
 GS_BUCKET_NAME = 'media-storages-288814'
