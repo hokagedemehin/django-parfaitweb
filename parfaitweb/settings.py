@@ -140,6 +140,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = os.environ['DB_EMAIL']
+# EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
+
 EMAIL_HOST_USER = os.environ['DB_EMAIL']
 EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
 
@@ -157,8 +160,11 @@ GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
 ########################################################################
 ###configuration for media file storing and reriving media file from gcloud 
 DEFAULT_FILE_STORAGE = 'parfaitweb.gcloud.GoogleCloudMediaFileStorage'
-GS_PROJECT_ID = os.environ.get('GS_PROJECT_ID')
-GS_BUCKET_NAME = os.environ.get('GS_BUCKET_NAME')
+# GS_PROJECT_ID = os.environ.get('GS_PROJECT_ID')
+# GS_BUCKET_NAME = os.environ.get('GS_BUCKET_NAME')
+
+GS_PROJECT_ID = 'ibk-storages'
+GS_BUCKET_NAME = 'media-storages-288814'
 MEDIA_ROOT = "media/"
 UPLOAD_ROOT = 'media/uploads/'
 MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
