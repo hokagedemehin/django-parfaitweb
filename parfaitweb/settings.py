@@ -23,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '==731vmj4dl_-pgsaagg$-4+%e5ipr&zcvh%mdkzwlp+=9y6dv'
+# SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -133,14 +134,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# CONTACT ME EMAL SET UP
+# CONTACT ME EMAIL SET UP
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "ibk2k7@gmail.com"
-EMAIL_HOST_PASSWORD = 'gaistceipzkhjowj'
+EMAIL_HOST_USER = os.environ.get('DS_EMAIL')
+EMAIL_HOST_PASSWORD = os.environ.get('DB_PASS')
 
 
 # GOOGLE CLOUD SEETINGS
@@ -153,8 +154,8 @@ GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
 
 ###configuration for media file storing and reriving media file from gcloud 
 DEFAULT_FILE_STORAGE = 'parfaitweb.gcloud.GoogleCloudMediaFileStorage'
-GS_PROJECT_ID = 'media-storages-288814'
-GS_BUCKET_NAME = 'ibk-storages'
+GS_PROJECT_ID = os.environ.get('GS_PROJECT_ID')
+GS_BUCKET_NAME = os.environ.get('GS_BUCKET_NAME')
 MEDIA_ROOT = "media/"
 UPLOAD_ROOT = 'media/uploads/'
 MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)

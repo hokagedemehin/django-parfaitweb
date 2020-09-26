@@ -124,6 +124,6 @@ const links = document.querySelectorAll('.nav-link');
     console.log(links)
     links.forEach((navlink) => {
       navlink.addEventListener('click', () => {
-        console.log(link , 'is active')
-      })
-    })
+        console.log(link , 'is active');
+      });
+    });

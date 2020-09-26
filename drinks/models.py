@@ -117,7 +117,7 @@ class Order(models.Model):
             count = 1
             while has_slug:
                 count += 1
-                slugOrder = slugify(self.customer.name) + '-' + str(count)
+                slugOrder = slugify(str(self.id)) + '-' + str(count)
                 has_slug = Order.objects.filter(slugOrder=slugOrder).exists()
             self.slugOrder = slugOrder
 
