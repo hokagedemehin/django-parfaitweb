@@ -143,8 +143,8 @@ EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = os.environ['DB_EMAIL']
 # EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
 
-EMAIL_HOST_USER = os.environ['DB_EMAIL']
-EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
+EMAIL_HOST_USER = 'ibk2k7@gmail.com'
+EMAIL_HOST_PASSWORD = 'gaistceipzkhjowj'
 
 
 # GOOGLE CLOUD SEETINGS
