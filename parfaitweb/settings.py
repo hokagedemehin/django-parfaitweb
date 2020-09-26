@@ -28,9 +28,9 @@ SECRET_KEY = '==731vmj4dl_-pgsaagg$-4+%e5ipr&zcvh%mdkzwlp+=9y6dv'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-# ALLOWED_HOSTS = ['dharmie-parfait.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['dharmie-parfait.herokuapp.com', '127.0.0.1']
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -143,8 +143,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = os.environ['DB_EMAIL']
-# EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
-EMAIL_HOST_PASSWORD = heroku get:config
+EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
+# EMAIL_HOST_PASSWORD = heroku get:config DB_PASS
 
 EMAIL_HOST_USER = 'ibk2k7@gmail.com'
 # EMAIL_HOST_PASSWORD = 'gaistceipzkhjowj'
