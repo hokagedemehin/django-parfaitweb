@@ -193,13 +193,19 @@ import environ
 
 # root = environ.Path(__file__)
 
-env = environ.Env()
-env.read_env(env.str('ENV_PATH', os.path.join(BASE_DIR, '.env')))
+# env = environ.Env()
+# env.read_env(env.str('ENV_PATH', os.path.join(BASE_DIR, '.env')))
 
-EMAIL_HOST_PASSWORD = env('DB_PASS')
+# EMAIL_HOST_PASSWORD = env('DB_PASS')
+
+
 # SITE_ROOT = root()
 
 # from decouple import  config
 
 # EMAIL_HOST_PASSWORD = config("DB_PASS")
+
+from boto.s3.connection import S3Connection
+s3 = S3Connection(os.environ['DB_PASS'])
+
 
