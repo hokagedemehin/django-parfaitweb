@@ -143,7 +143,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = os.environ['DB_EMAIL']
-EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
+EMAIL_HOST_PASSWORD = os.environ['EMAL_HOST_PASSWORD']
 
 EMAIL_HOST_USER = 'ibk2k7@gmail.com'
 # EMAIL_HOST_PASSWORD = 'gaistceipzkhjowj'
