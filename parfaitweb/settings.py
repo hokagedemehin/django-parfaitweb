@@ -143,8 +143,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = os.environ['DB_EMAIL']
-# EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
-# EMAIL_HOST_PASSWORD = heroku get:config DB_PASS
+EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
 
 EMAIL_HOST_USER = 'ibk2k7@gmail.com'
 # EMAIL_HOST_PASSWORD = 'gaistceipzkhjowj'
@@ -204,8 +203,5 @@ import environ
 # from decouple import  config
 
 # EMAIL_HOST_PASSWORD = config("DB_PASS")
-
-from boto.s3.connection import S3Connection
-s3 = S3Connection(os.environ['DB_PASS'])
 
 
