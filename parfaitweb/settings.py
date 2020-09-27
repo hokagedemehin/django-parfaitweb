@@ -142,13 +142,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = os.environ['DB_EMAIL']
+EMAIL_HOST_USER = os.environ['DB_EMAIL']
+EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
 
-
-EMAIL_HOST_USER = 'ibk2k7@gmail.com'
+# EMAIL_HOST_USER = 'ibk2k7@gmail.com'
 # EMAIL_HOST_PASSWORD = 'gaistceipzkhjowj'
 # EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
+
 
 # GOOGLE CLOUD SEETINGS
 #COMMENT OUT MEDIA URL AND MEDIA ROOT
@@ -169,6 +169,11 @@ GS_BUCKET_NAME = 'ibk-storages'
 MEDIA_ROOT = "media/"
 UPLOAD_ROOT = 'media/uploads/'
 MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
+
+
+GS_PROJECT_ID = os.environ['GS_PROJECT_ID']
+GS_BUCKET_NAME = os.environ['GS_BUCKET_NAME']
+
 
 ### PRODUCTION CHANGES NOTES
 """
