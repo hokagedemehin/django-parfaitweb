@@ -187,3 +187,10 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 django_heroku.settings(locals())
+
+######### django environ ##############
+import environ
+
+env = environ.Env()
+EMAIL_HOST_PASSWORD = env("DB_PASS")
+
