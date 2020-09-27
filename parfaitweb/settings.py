@@ -180,7 +180,7 @@ ADDED DJANGO_HEROKU IMPORT AT THE TOP AND CODE AT THE BOTTOM
 
 """
 
-DEBUG = True
+DEBUG = False
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)

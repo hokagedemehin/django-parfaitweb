@@ -111,9 +111,9 @@ class Order(models.Model):
     
     def save(self, *args, **kwargs):
         if self.slugOrder == None:
-            slugOrder = slugify(self.customer.name)
+            slugOrder = slugify(str(self.id))
 
-            has_slug =Order.objects.filter(slugOrder = slugOrder).exists()
+            has_slug = Order.objects.filter(slugOrder = slugOrder).exists()
             count = 1
             while has_slug:
                 count += 1
