@@ -199,5 +199,6 @@ django_heroku.settings(locals())
 # SITE_ROOT = root()
 
 from decouple import  config
+
 EMAIL_HOST_PASSWORD = config("DB_PASS")
 
