@@ -147,7 +147,7 @@ EMAIL_USE_TLS = True
 # EMAIL_HOST_PASSWORD = heroku get:config DB_PASS
 
 EMAIL_HOST_USER = 'ibk2k7@gmail.com'
-EMAIL_HOST_PASSWORD = 'gaistceipzkhjowj'
+# EMAIL_HOST_PASSWORD = 'gaistceipzkhjowj'
 
 
 # GOOGLE CLOUD SEETINGS
@@ -189,8 +189,14 @@ DATABASES['default'].update(db_from_env)
 django_heroku.settings(locals())
 
 ######### django environ ##############
-# import environ
+import environ
 
-# env = environ.Env()
-# EMAIL_HOST_PASSWORD = env("DB_PASS")
+root = environ.Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+environ.Env.read_env()
+
+SITE_ROOT = root()
+
+EMAIL_HOST_PASSWORD = env("DB_PASS")
 
