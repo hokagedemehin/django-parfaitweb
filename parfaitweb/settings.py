@@ -189,14 +189,15 @@ DATABASES['default'].update(db_from_env)
 django_heroku.settings(locals())
 
 ######### django environ ##############
-import environ
+# import environ
 
-root = environ.Path(__file__)
+# root = environ.Path(__file__)
 
-env = environ.Env()
-environ.Env.read_env()
+# env = environ.Env()
+# environ.Env.read_env()
 
-SITE_ROOT = root()
+# SITE_ROOT = root()
 
-EMAIL_HOST_PASSWORD = env("DB_PASS")
+from decouple import  config
+EMAIL_HOST_PASSWORD = config("DB_PASS")
 
