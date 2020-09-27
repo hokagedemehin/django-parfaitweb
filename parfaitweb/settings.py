@@ -155,7 +155,7 @@ EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
 
 from google.oauth2 import service_account
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR, 'credentials.json')
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS']
 )
 
 #######GOOGLE CLOUD STORAGE#####################
@@ -187,7 +187,9 @@ ADDED DJANGO_HEROKU IMPORT AT THE TOP AND CODE AT THE BOTTOM
 
 """
 
-DEBUG = False
+# DEBUG = False
+DEBUG = True
+
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)

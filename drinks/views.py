@@ -53,7 +53,7 @@ def storeParfait(request, slugProduct):
         # products = Product.objects.get(slugProduct=slugProduct)
         # allproducts = Product.objects.exclude(name=products.name)
     products = Product.objects.get(slugProduct=slugProduct)
-    allproducts = Product.objects.exclude(name=products.name)
+    allproducts = Product.objects.exclude(name=products.name)[:3]
     context = {'products':products, 'allproducts':allproducts, 'cartItems':cartItems}
     
     return render(request, 'drinks/store_parfait.html', context)
