@@ -147,7 +147,7 @@ EMAIL_USE_TLS = True
 # EMAIL_HOST_PASSWORD = heroku get:config DB_PASS
 
 EMAIL_HOST_USER = 'ibk2k7@gmail.com'
-# EMAIL_HOST_PASSWORD = 'gaistceipzkhjowj'
+EMAIL_HOST_PASSWORD = 'gaistceipzkhjowj'
 
 
 # GOOGLE CLOUD SEETINGS
@@ -198,7 +198,7 @@ django_heroku.settings(locals())
 
 # SITE_ROOT = root()
 
-from decouple import  config
+# from decouple import  config
 
-EMAIL_HOST_PASSWORD = config("DB_PASS")
+# EMAIL_HOST_PASSWORD = config("DB_PASS")
 
