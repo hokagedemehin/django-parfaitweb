@@ -191,7 +191,7 @@ django_heroku.settings(locals())
 ######### django environ ##############
 import environ
 
-root = environ.Path(__file__).resolve().parent.parent
+root = environ.Path(__file__)
 
 env = environ.Env()
 environ.Env.read_env()
