@@ -164,8 +164,8 @@ GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
 ###configuration for media file storing and reriving media file from gcloud 
 DEFAULT_FILE_STORAGE = 'parfaitweb.gcloud.GoogleCloudMediaFileStorage'
 
-GS_PROJECT_ID = 'media-storages-288814'
-GS_BUCKET_NAME = 'ibk-storages'
+# GS_PROJECT_ID = 'media-storages-288814'
+# GS_BUCKET_NAME = 'ibk-storages'
 MEDIA_ROOT = "media/"
 UPLOAD_ROOT = 'media/uploads/'
 MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
