@@ -155,6 +155,7 @@ EMAIL_HOST_PASSWORD = os.environ['DB_PASS']
 
 from google.oauth2 import service_account
 import json
+# TRY AGIAN
 # service_account_info = json.load(open(os.environ['GOOGLE_APPLICATION_CREDENTIALS']))
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
     os.environ['GOOGLE_APPLICATION_CREDENTIALS']
