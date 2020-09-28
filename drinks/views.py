@@ -53,7 +53,7 @@ def storeParfait(request, slugProduct):
         # products = Product.objects.get(slugProduct=slugProduct)
         # allproducts = Product.objects.exclude(name=products.name)
     products = Product.objects.get(slugProduct=slugProduct)
-    allproducts = Product.objects.exclude(name=products.name)[:3]
+    allproducts = Product.objects.exclude(name=products.name)
     context = {'products':products, 'allproducts':allproducts, 'cartItems':cartItems}
     
     return render(request, 'drinks/store_parfait.html', context)
@@ -451,6 +451,7 @@ def ProfilePage(request):
         form = CustomerForm(request.POST, request.FILES, instance=customer)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Your profile was updated successfully')
 
     context = {'form':form, 'cartItems': cartItems}
     return render(request, 'drinks/profile.html', context)

@@ -1,6 +1,6 @@
 {% load static%}
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-light tw-bg-gray-500 tw-text-xl tw-font-bold tw-font-fam5">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light tw-bg-gray-500 tw-text-xl tw-font-bold tw-font-fam5" id="nav">
     <a href="{% url 'store' %}" class="navbar-brand">
         <img src="{% static 'images/logo1.jpeg' %}" alt="" class="tw-w-12 tw-rounded-full md:tw-w-16" loading="lazy">
     </a>
@@ -11,10 +11,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto ">
         <li class="nav-item ">
-          <a class="nav-link active" aria-pressed="true" href="{% url 'store' %}">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" id="home" aria-pressed="true" href="{% url 'store' %}">Home </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'parfait' %}">Parfait</a>
+          <a class="nav-link" href="{% url 'parfait' %}">Parfait </a>
         </li>
         {% if user.is_authenticated %}
         {% if user.is_superuser %}
@@ -59,31 +59,4 @@
       </ul>
     </div>
   </nav>
-
-  <!-- <script type="text/javascript">
-    let links = document.querySelectorAll('.nav-link');
-    links.forEach((link) => {
-      link.addEventListener('click', (e) => {
-        link.classList.toggle('active');
-        console.log(link , 'is active')
-      });
-    })
-    
-  </script> -->
-
-  <!-- <script type="text/javascript">
-    const links = document.querySelectorAll('.nav-item');
-    console.log(links)
-    links.forEach((navlink) => {
-      navlink.addEventListener('click', () => {
-        console.log(link , 'is active')
-      })
-    })
-    
-  </script>
-
-  <style>
-    .nav-link:active {
-        color: blue;
-    }
-</style> -->
+  

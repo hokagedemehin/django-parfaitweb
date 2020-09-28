@@ -6,23 +6,55 @@ Profile
 
 {% block content %}
 <div class="tw-mt-24"></div>
-<div class="row">
-    <div class="col-md-3 ml-2 mr-2 mb-2">
-        <div class="card card-body">
-            <a href="{% url 'store' %}" class="btn btn-warning">&#8592; Back to Profile</a>
+{% if messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert"></div>
+    <ul class="">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                <p class="alert-heading">
+                    {{ message }}
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}
+
+
+
+<div class="row tw-ml-2">
+    <div class="col-md-5 ml-2 mr-2 mb-2" >
+        <div class="card card-body tw-shadow-lg" style="border-radius: 1rem;">
+            <a href="{% url 'store' %}" class="btn btn-warning tw-text-lg tw-font-bold">&#8592; Back to Profile</a>
             <hr>
-            <h3 style='text-align: center'>Account Settings</h3>
-            <hr>
-            <img src="{{request.user.customer.profile_pic.url}}" alt="" class="profile-pic1">
+            <h3 class="tw-my-4 tw-font-bold tw-text-xl" style='text-align: center'>Account Settings</h3>
+            <!-- <hr> -->
+            <div class=" tw-flex tw-justify-center tw-items-center ">
+                <img src="{{request.user.customer.profile_pic.url}}" alt="" class="tw-rounded-full tw-w-40 tw-h-40 md:tw-w-56 md:tw-h-56">
+            </div>
+            
         </div>
     </div>
-    <div class="col-md-5 ml-2 mr-2">
-        <div class="card card-body">
-            <form action="" method="post" enctype="multipart/form-data">
-                {%csrf_token%}
-                {{form.as_p}}
-                <input type="submit" class="btn btn-primary" value="Update Information">
-            </form>
+    <div class="col-md-6">
+        <div class="card card-body tw-bg-gray-400  tw-shadow-lg tw-mb-4 tw-mx-2 md:tw-mx-0" style="border-radius: 1rem;">
+            <div class="">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    {% for field in form %}
+                            <div class="fieldWrapper">
+                                {{ field.errors }}
+                                <span class="tw-text-lg tw-font-bold ">{{ field.label_tag }} </span>
+                                <div class="tw-mb-3" >{{ field }}</div>
+                               
+                            </div>
+                        {% endfor %}
+                    <!-- {{form.as_p}} -->
+                    <input type="submit" class="btn btn-primary tw-mt-2" value="Update Information">
+                </form>
+            </div>
         </div>
     </div>
 </div>

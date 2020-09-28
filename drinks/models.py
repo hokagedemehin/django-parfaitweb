@@ -111,13 +111,13 @@ class Order(models.Model):
     
     def save(self, *args, **kwargs):
         if self.slugOrder == None:
-            slugOrder = slugify(str(self.id))
+            slugOrder = slugify(self.customer.name)
 
             has_slug = Order.objects.filter(slugOrder = slugOrder).exists()
             count = 1
             while has_slug:
                 count += 1
-                slugOrder = slugify(str(self.id)) + '-' + str(count)
+                slugOrder = slugify(self.customer.name) + '-' + str(count)
                 has_slug = Order.objects.filter(slugOrder=slugOrder).exists()
             self.slugOrder = slugOrder
 
@@ -137,7 +137,7 @@ class ShippingAddress(models.Model):
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True)
     ship = models.ForeignKey(ShippingAddress, on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)

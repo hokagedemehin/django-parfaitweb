@@ -120,10 +120,55 @@ main.style.minHeight = `calc(${winHeight}px - ${footHeight}px)`;
 // console.log(htmlheight); 
 
 
-const links = document.querySelectorAll('.nav-link');
-    console.log(links)
-    links.forEach((navlink) => {
-      navlink.addEventListener('click', () => {
-        console.log(link , 'is active');
-      });
-    });
+// const navitem = document.querySelectorAll('.nav-item');
+
+// navitem.forEach((item) => {
+//     const btn = item.querySelector('.nav-link');
+//     btn.addEventListener('click', ()=>{
+//         item.classList.toggle('active');
+//         item.classList.
+//         console.log('item clicked');
+//     });
+// });
+
+// (function() {
+//     var nav = document.getElementById('nav'),
+//         anchor = nav.getElementsByTagName('a'),
+//         current = window.location.pathname.split('/')[1];
+//         for (var i = 0; i < anchor.length; i++) {
+//         if(anchor[i].href == current) {
+//             anchor[i].classList.toggle('active')
+//             console.log(anchor[i]);
+//         }
+//     }
+// })();
+
+function setNavigation() {
+    let current_location = location.pathname.split('/')[1];
+    if (current_location === "") 
+        return document.querySelector('#home').classList.toggle('active');
+    let menu_items = document.querySelector("nav").getElementsByTagName("a");
+    for (let i = 0, len = menu_items.length; i < len; i++) {
+      if (menu_items[i].getAttribute("href").indexOf(current_location) !== -1) {
+        // menu_items[i].className = "active";
+        menu_items[i].classList.toggle('active');
+        console.log(menu_items[i]);
+      }
+    }
+  }
+  setNavigation();
+
+
+const topLink = document.querySelector('.top-link');
+window.addEventListener('scroll', ()=>{
+    const scrollHeight = window.pageYOffset;
+
+    if (scrollHeight > 700) {
+        topLink.classList.remove('tw-invisible')
+        topLink.classList.add('tw-visible');
+    }
+    else {
+        topLink.classList.remove('tw-visible');
+        topLink.classList.add('tw-invisible');
+    }
+});

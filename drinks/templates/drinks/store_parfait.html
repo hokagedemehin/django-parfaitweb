@@ -57,7 +57,7 @@ Parfait Item Detail
             <div class="quantity-cart tw-mb-3">
                 <div class="">
                     <button data-product={{products.id}} data-action="add" data-record="{{products.records}}" class="card-link btn btn-success tw-flex tw-items-center tw-justify-center tw-rounded-full update-cart"> 
-                        <i class="fas fa-shopping-cart fa-lg  "></i> <span>Add to Cart</span>
+                        <i class="fas fa-shopping-cart fa-lg  "></i> <br> <span class="tw-w-full">Add to Cart</span>
                     </button>
                 </div>
                 
@@ -71,7 +71,7 @@ Parfait Item Detail
     <p class="tw-text-center tw-my-4 tw-text-4xl md:tw-text-5xl tw-font-fam5 tw-font-black tw-text-yellow-600">You may also like </p>
 </div>
 
-<div class="container-fluid tw-flex tw-flex-col tw-justify-center tw-items-center md:tw-flex md:tw-flex-row  md:tw-justify-evenly">
+<!-- <div class="container-fluid tw-flex tw-flex-col tw-justify-center tw-items-center md:tw-flex md:tw-flex-row  md:tw-justify-evenly">
     {%for item in allproducts%}
     
         <div class="image tw-w-full tw-mb-5 md:tw-w-1/5">
@@ -79,12 +79,36 @@ Parfait Item Detail
             <div class="tw-font-bold tw-text-xl ">{{item.name}}</div>
             <div class="tw-font-bold tw-text-lg">&#x20A6;{{item.price | floatformat:2}}</div>
             <div>
-                <a href="{% url 'store-parfait' item.slugProduct %}" class="card-link btn btn-outline-primary btn-sm tw-rounded-full tw-m-1"> <!--view product-->
+                <a href="{% url 'store-parfait' item.slugProduct %}" class="card-link btn btn-outline-primary btn-sm tw-rounded-full tw-m-1">
                     <i class="fas fa-eye fa-lg  "></i> <span>View</span>
                 </a>
             </div>
 
         </div>
     {% endfor %}
-</div>
+</div> -->
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        {%for item in allproducts%}
+        <div class="swiper-slide" >
+            
+            <div class="image tw-w-full tw-mb-5">
+                    <img src="{% if item.imageURL == '' %} https://via.placeholder.com/500x300/DCDCDC/FFF?text=Dharmie+Parfait {%else%} {{item.imageURL}} {%endif%}" class="card-img-top tw-object-cover tw-h-64 " style="border-radius: 1rem;" alt="...">
+                    <div class="tw-font-bold tw-text-xl ">{{item.name}}</div>
+                    <div class="tw-font-bold tw-text-lg">&#x20A6;{{item.price | floatformat:2}}</div>
+                    <div>
+                        <a href="{% url 'store-parfait' item.slugProduct %}" class="card-link btn btn-outline-primary btn-sm tw-rounded-full tw-m-1"> <!--view product-->
+                            <i class="fas fa-eye fa-lg  "></i> <span>View</span>
+                        </a>
+                    </div>
+
+            </div>
+        
+        </div>
+        {% endfor %}
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
 {%endblock content%}

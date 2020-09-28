@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" id="htmltag">
+<html lang="en" id="htmltag" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +17,7 @@
     <!-- Animate on scroll -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="{% static 'css/main.css'  %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <script type="text/javascript">
         var user = '{{request.user}}'
         function getToken(name) {
@@ -62,22 +63,43 @@
         }
         console.log('cart exist outside from main', cart)
     </script>
-    <!-- <style>
-        .nav-link:active {
-            color: blue;
-        }
-    </style> -->
     <title>
         {% block title %} {% endblock title %}
     </title>
+    <style>
+        .swiper-container {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            
+          }
+        
+          .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 300px;
+            height: 300px;
+            margin: 0 4rem;
+           
+          }
+        
+        
+        .swiper-container-3d .swiper-slide-shadow-left,
+        .swiper-container-3d .swiper-slide-shadow-right {
+          background-image: none; }
+    </style>
 </head>
 <body  class="tw-bg-gray-300 tw-overflow-x-hidden" id='bodytag'>
     <main class="main ">
         {% include 'drinks/navbar.html' %}
-    
+        <div id="top"></div>
         {% block content%}
 
         {% endblock content%}
+        <!-- back to top -->
+        <a href="#top" class=" top-link tw-z-50 tw-text-2xl tw-fixed tw-w-10 tw-h-10 tw-bg-gray-200  tw-text-center tw-rounded-full tw-invisible" style="bottom: 2rem; right: 1rem;">
+            <i class="fas fa-arrow-up fa-sm  "></i>
+        </a>
     </main>
 
     <footer class="foot">
@@ -118,6 +140,22 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script defer type="text/javascript" src="{% static 'js/cart.js' %}"></script>
-    
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script  defer type="text/javascript">
+        var swiper = new Swiper('.swiper-container', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+              rotate: 0,
+              stretch: 0,
+              depth: 0,
+              modifier: 1,
+              slideShadows: true,
+            },
+            loop: true,
+          });
+    </script>
 </body>
 </html>
