@@ -160,7 +160,7 @@ import json
 # service_account_info = json.load(open(os.environ['GOOGLE_APPLICATION_CREDENTIALS']))
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
     # credentials are tot be ignored
-    os.path.join(BASE_DIR, 'google_credentials.json')
+    os.path.join(BASE_DIR, 'google-credentials.json')
 )
 
 #######GOOGLE CLOUD STORAGE#####################
