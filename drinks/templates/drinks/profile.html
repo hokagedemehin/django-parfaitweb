@@ -6,8 +6,10 @@ Profile
 
 {% block content %}
 <div class="tw-mt-24"></div>
+
+
 {% if messages %}
-    <div class="alert alert-success alert-dismissible fade show" role="alert"></div>
+    <div class="alert alert-success alert-dismissible fade show tw-my-4" role="alert">
     <ul class="">
         {% for message in messages %}
             <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
@@ -22,8 +24,6 @@ Profile
       </button>
     </div>
     {% endif %}
-
-
 
 <div class="row tw-ml-2">
     <div class="col-md-5 ml-2 mr-2 mb-2" >
@@ -58,4 +58,5 @@ Profile
         </div>
     </div>
 </div>
+
 {% endblock content%}
