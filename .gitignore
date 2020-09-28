@@ -2,10 +2,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
-google-credentials.json
+# google-credentials.json
 #node_module file
 static/tailwind/node_modules/
-credentials.json
+# credentials.json
 # C:\Users\George D\Visual Studio\Django\Dharmie\parfaitweb\credentials.json
 # C extensions
 *.so
