@@ -5,7 +5,7 @@ __pycache__/
 google-credentials.json
 #node_module file
 static/tailwind/node_modules/
-credentials.json
+# credentials.json
 credential.json
 # C:\Users\George D\Visual Studio\Django\Dharmie\parfaitweb\credentials.json
 # C extensions
