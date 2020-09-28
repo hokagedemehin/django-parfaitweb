@@ -2,9 +2,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
-# google-credentials.json
-# credentials.json
-# credential.json
+google-credentials.json
+credentials.json
+credential.json
 #node_module file
 static/tailwind/node_modules/
 
