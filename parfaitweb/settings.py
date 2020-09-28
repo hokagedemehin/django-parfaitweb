@@ -157,7 +157,7 @@ from google.oauth2 import service_account
 import json
 # service_account_info = json.load(open(os.environ['GOOGLE_APPLICATION_CREDENTIALS']))
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS']
+    os.environ['GOOGLE_CREDENTIALS']
 )
 
 #######GOOGLE CLOUD STORAGE#####################
