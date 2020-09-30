@@ -9,59 +9,68 @@ Check out
     <div class="row row-cols-1 row-cols-md-3 tw-flex tw-justify-center tw-mx-1 ">
         <div class="col tw-bg-white tw-mb-4 tw-p-6 md:tw-mr-8 tw-shadow-md" style="border-radius: 2rem; height: fit-content;">
             <div id="form-wrapper">
-                <form id="form">
-                  {%csrf_token%}
-                  <div class="form-row " id="user-info">
-                      <div class="form-group col-md-6 ">
-                          <label for="inputName">Name</label>
-                          <input type="text"  name="name" class="form-control" id="inputName" placeholder="Full Name...">
-                      </div>
-                      <div class="form-group col-md-6">
-                          <label for="inputEmail4">Email</label>
-                          <input type="email" name="email"  class="form-control" id="inputEmail4" placeholder="example@email.com">
-                      </div>
+              <form id="form">
+                {%csrf_token%}
+                <div class="form-row " id="user-info">
+                    <div class="form-group col-md-6 ">
+                        <label for="inputName">Name</label>
+                        <input type="text"  name="name" class="form-control" id="inputName" placeholder="Full Name...">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Email</label>
+                        <input type="email" name="email"  class="form-control" id="inputEmail4" placeholder="example@email.com">
+                    </div>
+                </div>
+                <hr>
+                <br>
+                <div id="shipping-info">
+                  <div class="form-group col">
+                    <strong>Shipping Address</strong>
                   </div>
                   <hr>
                   <br>
-                  <div id="shipping-info">
-                    <div class="form-group col">
-                      <strong>Shipping Address</strong>
-                    </div>
-                    <hr>
-                    <br>
-                    <div class="form-group">
-                        <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main St">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="inputCountry">Country</label>
-                          <input type="text" class="form-control" id="inputCountry" name="country">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="inputState">State</label>
-                          <input type="text" class="form-control" id="inputState" name="state">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="inputCity">City</label>
-                          <input type="text" class="form-control" id="inputCity" name="city">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="inputZipCode">ZipCode</label>
-                          <input type="text" class="form-control" id="inputZipCode" name="zipcode">
-                        </div>
-                    </div>
+                  <div class="form-group">
+                      <label for="inputAddress">Address</label>
+                      <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main St">
                   </div>
-                  
-                  <!-- <input type="submit" class="btn btn-success tw-rounded-full " id="form-button" value="Continue"> -->
-                  <script src="https://checkout.flutterwave.com/v3.js"></script>
-                  <button type="button" onClick="makePayment()" class="btn btn-success tw-rounded-full">Pay Now</button>
-  
-              </form>
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputCountry">Country</label>
+                        <input type="text" class="form-control" id="inputCountry" name="country">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputState">State</label>
+                        <input type="text" class="form-control" id="inputState" name="state">
+                      </div>
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputCity">City</label>
+                        <input type="text" class="form-control" id="inputCity" name="city">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputZipCode">ZipCode</label>
+                        <input type="text" class="form-control" id="inputZipCode" name="zipcode">
+                      </div>
+                  </div>
+                </div>
+                
+                <input type="submit" class="btn btn-success tw-rounded-full " id="form-button" value="Continue">
+            </form>
+
+            <!-- <form method="POST" action="https://checkout.flutterwave.com/v3/hosted/pay">
+              <input type="hidden" name="public_key" value="FLWPUBK_TEST-fe309db7f0f38046e0ad47bef3a7e850-X" />
+              <input type="hidden" name="customer[email]" value="jessepinkman@walterwhite.org" />
+              <input type="hidden" name="customer[phone_number]" value="0900192039940" />
+              <input type="hidden" name="customer[name]" value="Jesse Pinkman demehin" />
+              <input type="hidden" name="tx_ref" value="bitethtx-019203" />
+              <input type="hidden" name="amount" value={{order.get_cart_total}} />
+              <input type="hidden" name="currency" value="NGN" />
+              <input type="hidden" name="meta[token]" value="54" />
+              <input type="hidden" name="redirect_url" value="{% url 'store' %}" />
+              <button type="submit">CHECKOUT</button> 
+            </form> -->
             </div>
-            
             <br>
             <hr>
             <div class="tw-hidden" id="payment-info">
@@ -69,8 +78,7 @@ Check out
               <div id="paypal-button-container"></div>
               <!-- <button type="submit" id="make-payment" class="btn btn-outline-success tw-rounded-full">Make Payment</button> -->
             </div>
-      </div>
-       
+        </div>
         
         <div class="col tw-bg-white tw-mb-4 tw-p-6 tw-shadow-md" style="border-radius: 2rem; height: fit-content;">
             <form>
@@ -128,9 +136,9 @@ Check out
     
 </div>
 
-<!-- <script src="https://www.paypal.com/sdk/js?client-id=AatM1zPgaCzuE0pYBc6p20cP_56s90xB6T2yPZSM4agJgWyajOY1OxUFk9KUZC-aygTEz4sh0oCy10Es&currency=USD&disable-funding=credit"></script> -->
+<script src="https://www.paypal.com/sdk/js?client-id=AatM1zPgaCzuE0pYBc6p20cP_56s90xB6T2yPZSM4agJgWyajOY1OxUFk9KUZC-aygTEz4sh0oCy10Es&currency=USD&disable-funding=credit"></script>
 
-<!-- <script>
+<script>
   var total = '{{order.get_cart_total}}'
   // Render the PayPal button into #paypal-button-container
   paypal.Buttons({
@@ -161,7 +169,7 @@ Check out
 
 
   }).render('#paypal-button-container');
-</script> -->
+</script>
 
 <script type="text/javascript"> 
   var shipping = '{{order.shipping}}'
@@ -204,8 +212,6 @@ Check out
     }
 
     if (shipping != 'False'){
-      userFormData.name = '{{order.customer}}'
-      userFormData.email = '{{order.customer.email}}'
       shippingInfo.address = form.address.value;
       shippingInfo.city = form.city.value;
       shippingInfo.state = form.state.value;
@@ -247,107 +253,51 @@ Check out
   
 </script>
 
-
-
-  <!-- <form>
-    {% csrf_token %}
-    <script src="https://checkout.flutterwave.com/v3.js"></script>
-    <button type="button" onClick="makePayment()" class="btn btn-outline-success tw-rounded-full">Pay Now</button>
-  </form> -->
-  
-  <script>
-    var shipping = '{{order.shipping}}'
-    var total = '{{order.get_cart_total}}'
-    var form = document.getElementById('form')
-    var userFormData = {
-      'name': null,
-      'email': null,
-      'total': total,
-    }
-    var shippingInfo = {
-      'address': null,
-      'city': null,
-      'state': null,
-      'zipcode': null,
-    }
-
-    if (shipping != 'False'){
-      userFormData.name = '{{order.customer}}'
-      userFormData.email = '{{order.customer.email}}'
-      shippingInfo.address = form.address.value;
-      shippingInfo.city = form.city.value;
-      shippingInfo.state = form.state.value;
-      shippingInfo.zipcode = form.zipcode.value;
-    }
-
-    if (user == 'AnonymousUser') {
-      userFormData.name = form.name.value;
-      userFormData.email = form.email.value;
-      shippingInfo.address = form.address.value;
-      shippingInfo.city = form.city.value;
-      shippingInfo.state = form.state.value;
-      shippingInfo.zipcode = form.zipcode.value;
-    }
-
-    console.log('shipping:', shippingInfo)
-    console.log('userform', userFormData)
-
-    if (user == 'AnonymousUser') {
-     // emailid = document.getElementById('inputEmail4');
-     // window.onload = function getemail(){ emailid.addEventListener('input', () => { return emailid.value})}
-      //email = getemail
-      email = 'example@test.com'
-      name = 'Name testing'
-    } else {
-      email = '{{order.customer.email}}'
-      name = '{{order.customer}}'
-    }
-    
-    const hex = [0, 1, 2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-    let randomNumber = () => {return Math.floor(Math.random() * hex.length)};
-    let rand = '';
-    for(let i = 0; i < 10; i++) {
-        rand += hex[randomNumber()];
-    }
-    const transID = 'hooli-tx-' + rand;
-
-    function makePayment() {
-      FlutterwaveCheckout({
-        public_key: "FLWPUBK_TEST-fe309db7f0f38046e0ad47bef3a7e850-X",
-        tx_ref: transID,
-        amount: '{{order.get_cart_total}}',
-        currency: "NGN",
-        country: "NG",
-        payment_options: "card, ussd",
-        redirect_url: // specified redirect URL
-          "",
-        meta: {
-          consumer_id: 12,
-          consumer_mac: "92a3-912ba-1192a",
-        },
-        customer: {
-          email: email,
-          phone_number: "08102909304",
-          name: name,
-        },
-        callback: (data) => { 
-        console.log('payment completed', data)
-        submitFormData() 
-      },
-        onclose: function() {
-          // close modal
-        },
-        customizations: {
-          title: "Darmie Parfait",
-          description: "Payment for Parfait in cart",
-          logo: "https://storage.googleapis.com/ibk-storages/parfait7.jpg",
-
-          
-        },
-      });
-      
-    }
-  </script>
-
 {% endblock content %}
 
+<!-- <form>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Email</label>
+        <input type="email" class="form-control" id="inputEmail4">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Password</label>
+        <input type="password" class="form-control" id="inputPassword4">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress">Address</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    </div>
+    <div class="form-group">
+      <label for="inputAddress2">Address 2</label>
+      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity">City</label>
+        <input type="text" class="form-control" id="inputCity">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">State</label>
+        <select id="inputState" class="form-control">
+          <option selected>Choose...</option>
+          <option>...</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Zip</label>
+        <input type="text" class="form-control" id="inputZip">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+          Check me out
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </form> -->
