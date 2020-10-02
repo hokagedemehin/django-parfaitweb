@@ -222,13 +222,13 @@ Check out
     if (shipping != 'False'){
       userFormData1.name = '{{order.customer}}'
       userFormData1.email = '{{order.customer.email}}'
-      
+      userFormData.phone = '{{order.customer.phone}}'
     }
 
     if (user == 'AnonymousUser') {
       userFormData1.name = form.name.value;
       userFormData1.email = form.email.value;
-      
+      userFormData.phone = form.phone.value;
     }
     console.log(userFormData1)
     return userFormData1.email
@@ -260,9 +260,9 @@ Check out
     }
 
     if (user == 'AnonymousUser') {
-      userFormData.name = form1.name.value;
-      userFormData.email = form1.email.value;
-      userFormData.phone = form1.phone.value;
+      userFormData.name = form.name.value;
+      userFormData.email = form.email.value;
+      userFormData.phone = form.phone.value;
       shippingInfo.address = form.address.value;
       shippingInfo.city = form.city.value;
       shippingInfo.state = form.state.value;
