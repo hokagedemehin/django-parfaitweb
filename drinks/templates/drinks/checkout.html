@@ -222,13 +222,13 @@ Check out
     if (shipping != 'False'){
       userFormData1.name = '{{order.customer}}'
       userFormData1.email = '{{order.customer.email}}'
-      userFormData.phone = '{{order.customer.phone}}'
+      userFormData1.phone = '{{order.customer.phone}}'
     }
 
     if (user == 'AnonymousUser') {
       userFormData1.name = form.name.value;
       userFormData1.email = form.email.value;
-      userFormData.phone = form.phone.value;
+      userFormData1.phone = form.phone.value;
     }
     console.log(userFormData1)
     return userFormData1.email
