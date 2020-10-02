@@ -12,6 +12,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=1000, null=True)
+    phone = models.CharField(max_length=500, null=True, blank=True)
     profile_pic = models.ImageField(default = "profile_default.jpg",null=True, blank=True)
     slugCustomer = models.SlugField(null=True, blank=True)
 
@@ -32,7 +33,11 @@ class Customer(models.Model):
 
         super().save(*args, **kwargs)
 
-    
+class Flutter(models.Model):
+    publicKey = models.CharField(max_length=2000, null=True, blank=True)
+    secretKey = models.CharField(max_length=2000, null=True, blank=True)
+    encryptionKey = models.CharField(max_length=2000, null=True, blank=True)
+
 
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)

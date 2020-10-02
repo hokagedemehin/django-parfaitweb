@@ -9,68 +9,88 @@ Check out
     <div class="row row-cols-1 row-cols-md-3 tw-flex tw-justify-center tw-mx-1 ">
         <div class="col tw-bg-white tw-mb-4 tw-p-6 md:tw-mr-8 tw-shadow-md" style="border-radius: 2rem; height: fit-content;">
             <div id="form-wrapper">
+              <!-- <form action="" id="form1">
+                {%csrf_token%}
+                
+              <button type="submit" class="btn btn-primary">Submit</button>
+              </form> -->
                 <form id="form">
                   {%csrf_token%}
+                 
+                  
                   <div class="form-row " id="user-info">
-                      <div class="form-group col-md-6 ">
-                          <label for="inputName">Name</label>
-                          <input type="text"  name="name" class="form-control" id="inputName" placeholder="Full Name...">
-                      </div>
-                      <div class="form-group col-md-6">
-                          <label for="inputEmail4">Email</label>
-                          <input type="email" name="email"  class="form-control" id="inputEmail4" placeholder="example@email.com">
-                      </div>
-                  </div>
-                  <hr>
-                  <br>
-                  <div id="shipping-info">
-                    <div class="form-group col">
-                      <strong>Shipping Address</strong>
+                    <div class="form-group col-12">
+                      <strong>Personal Information</strong>
                     </div>
+                    <!-- <br> -->
                     <hr>
                     <br>
-                    <div class="form-group">
-                        <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main St">
+                    <div class="form-group col-12">
+                      <label for="inputName">Name</label>
+                      <input type="text"  name="name" class="form-control" id="inputName" placeholder="Full Name...">
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="inputCountry">Country</label>
-                          <input type="text" class="form-control" id="inputCountry" name="country">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="inputState">State</label>
-                          <input type="text" class="form-control" id="inputState" name="state">
-                        </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Email</label>
+                      <input type="email" name="email"  class="form-control" id="inputEmail4" placeholder="example@email.com">
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="inputCity">City</label>
-                          <input type="text" class="form-control" id="inputCity" name="city">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="inputZipCode">ZipCode</label>
-                          <input type="text" class="form-control" id="inputZipCode" name="zipcode">
-                        </div>
+                    
+                    <div class="form-group col-md-6">
+                        <label for="inputPhone">Phone No</label>
+                        <input type="tel" name="phone"  class="form-control" id="inputPhone" placeholder="+234(0)8000000">
                     </div>
                   </div>
+                    <hr>
+                    <br>
+                    <div id="shipping-info">
+                      <div class="form-group col">
+                        <strong>Shipping Address</strong>
+                      </div>
+                      <hr>
+                      <br>
+                      <div class="form-group">
+                          <label for="inputAddress">Address</label>
+                          <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main St">
+                      </div>
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="inputCountry">Country</label>
+                            <input type="text" class="form-control" id="inputCountry" name="country">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="inputState">State</label>
+                            <input type="text" class="form-control" id="inputState" name="state">
+                          </div>
+                      </div>
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="inputCity">City</label>
+                            <input type="text" class="form-control" id="inputCity" name="city">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="inputZipCode">ZipCode</label>
+                            <input type="text" class="form-control" id="inputZipCode" name="zipcode">
+                          </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="form-button">Continue</button>
                   
-                  <!-- <input type="submit" class="btn btn-success tw-rounded-full " id="form-button" value="Continue"> -->
-                  <script src="https://checkout.flutterwave.com/v3.js"></script>
-                  <button type="button" onClick="makePayment()" class="btn btn-success tw-rounded-full">Pay Now</button>
-  
+                    <!-- <input type="submit" class="btn btn-success tw-rounded-full " id="form-button" value="Continue"> -->
+                    <!-- <input type="submit" class="btn btn-success tw-rounded-full " id="form-button" value="Continue"> -->
+                  
               </form>
             </div>
             
             <br>
-            <hr>
+            <!-- <hr> -->
             <div class="tw-hidden" id="payment-info">
-              <small>PayPal Option</small>
-              <div id="paypal-button-container"></div>
+              <script src="https://checkout.flutterwave.com/v3.js"></script>
+                  <button type="button" onClick="makePayment()" class="btn btn-success tw-rounded-full">Pay Now</button>
+  
+              <!-- <small>PayPal Option</small>
+              <div id="paypal-button-container"></div> -->
               <!-- <button type="submit" id="make-payment" class="btn btn-outline-success tw-rounded-full">Make Payment</button> -->
             </div>
       </div>
-       
         
         <div class="col tw-bg-white tw-mb-4 tw-p-6 tw-shadow-md" style="border-radius: 2rem; height: fit-content;">
             <form>
@@ -127,6 +147,7 @@ Check out
     </div>
     
 </div>
+
 
 <!-- <script src="https://www.paypal.com/sdk/js?client-id=AatM1zPgaCzuE0pYBc6p20cP_56s90xB6T2yPZSM4agJgWyajOY1OxUFk9KUZC-aygTEz4sh0oCy10Es&currency=USD&disable-funding=credit"></script> -->
 
@@ -185,15 +206,40 @@ Check out
     console.log('button works');
     document.getElementById('form-button').classList.add('tw-hidden');
     document.getElementById('payment-info').classList.remove('tw-hidden');
+    savedetails()
   });
   // document.getElementById('make-payment').addEventListener('click', () => {
     // submitFormData()
   // })
+  function savedetails(){
+    var userFormData1 = {
+      'name': null,
+      'email': null,
+      'phone': null,
+      'total': total,
+    }
+
+    if (shipping != 'False'){
+      userFormData1.name = '{{order.customer}}'
+      userFormData1.email = '{{order.customer.email}}'
+      
+    }
+
+    if (user == 'AnonymousUser') {
+      userFormData1.name = form.name.value;
+      userFormData1.email = form.email.value;
+      
+    }
+    console.log(userFormData1)
+    return userFormData1.email
+  }
+  
   function submitFormData(){
     console.log('payment completed')
     var userFormData = {
       'name': null,
       'email': null,
+      'phone': null,
       'total': total,
     }
     var shippingInfo = {
@@ -206,6 +252,7 @@ Check out
     if (shipping != 'False'){
       userFormData.name = '{{order.customer}}'
       userFormData.email = '{{order.customer.email}}'
+      userFormData.phone = '{{order.customer.phone}}'
       shippingInfo.address = form.address.value;
       shippingInfo.city = form.city.value;
       shippingInfo.state = form.state.value;
@@ -213,8 +260,9 @@ Check out
     }
 
     if (user == 'AnonymousUser') {
-      userFormData.name = form.name.value;
-      userFormData.email = form.email.value;
+      userFormData.name = form1.name.value;
+      userFormData.email = form1.email.value;
+      userFormData.phone = form1.phone.value;
       shippingInfo.address = form.address.value;
       shippingInfo.city = form.city.value;
       shippingInfo.state = form.state.value;
@@ -244,66 +292,7 @@ Check out
 
   }
 
-  
-</script>
-
-
-
-  <!-- <form>
-    {% csrf_token %}
-    <script src="https://checkout.flutterwave.com/v3.js"></script>
-    <button type="button" onClick="makePayment()" class="btn btn-outline-success tw-rounded-full">Pay Now</button>
-  </form> -->
-  
-  <script>
-    var shipping = '{{order.shipping}}'
-    var total = '{{order.get_cart_total}}'
-    var form = document.getElementById('form')
-    var userFormData = {
-      'name': null,
-      'email': null,
-      'total': total,
-    }
-    var shippingInfo = {
-      'address': null,
-      'city': null,
-      'state': null,
-      'zipcode': null,
-    }
-
-    if (shipping != 'False'){
-      userFormData.name = '{{order.customer}}'
-      userFormData.email = '{{order.customer.email}}'
-      shippingInfo.address = form.address.value;
-      shippingInfo.city = form.city.value;
-      shippingInfo.state = form.state.value;
-      shippingInfo.zipcode = form.zipcode.value;
-    }
-
-    if (user == 'AnonymousUser') {
-      userFormData.name = form.name.value;
-      userFormData.email = form.email.value;
-      shippingInfo.address = form.address.value;
-      shippingInfo.city = form.city.value;
-      shippingInfo.state = form.state.value;
-      shippingInfo.zipcode = form.zipcode.value;
-    }
-
-    console.log('shipping:', shippingInfo)
-    console.log('userform', userFormData)
-
-    if (user == 'AnonymousUser') {
-     // emailid = document.getElementById('inputEmail4');
-     // window.onload = function getemail(){ emailid.addEventListener('input', () => { return emailid.value})}
-      //email = getemail
-      email = 'example@test.com'
-      name = 'Name testing'
-    } else {
-      email = '{{order.customer.email}}'
-      name = '{{order.customer}}'
-    }
-    
-    const hex = [0, 1, 2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+  const hex = [0, 1, 2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
     let randomNumber = () => {return Math.floor(Math.random() * hex.length)};
     let rand = '';
     for(let i = 0; i < 10; i++) {
@@ -313,8 +302,8 @@ Check out
 
     function makePayment() {
       FlutterwaveCheckout({
-        public_key: "FLWPUBK_TEST-fe309db7f0f38046e0ad47bef3a7e850-X",
-        tx_ref: transID,
+        public_key: "{{publictest}}",
+        tx_ref:' transID',
         amount: '{{order.get_cart_total}}',
         currency: "NGN",
         country: "NG",
@@ -326,7 +315,7 @@ Check out
           consumer_mac: "92a3-912ba-1192a",
         },
         customer: {
-          email: email,
+          email: savedetails(),
           phone_number: "08102909304",
           name: name,
         },
@@ -347,7 +336,16 @@ Check out
       });
       
     }
-  </script>
+</script>
+
+
+
+  <!-- <form>
+    {% csrf_token %}
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <button type="button" onClick="makePayment()" class="btn btn-outline-success tw-rounded-full">Pay Now</button>
+  </form> -->
+  
 
 {% endblock content %}
 

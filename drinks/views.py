@@ -129,11 +129,15 @@ def checkout(request):
         # cartItems = cookieData['cartItems']
         # order = cookieData['order']
         # items = cookieData['items']
+    testkeys = Flutter.objects.first()
+    livekeys = Flutter.objects.last()
+    publictest = testkeys.publicKey
+    livetest = livekeys.publicKey
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'publictest': publictest, 'livetest': livetest}
     return render(request, 'drinks/checkout.html', context)
 
 
