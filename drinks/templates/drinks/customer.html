@@ -1,0 +1,71 @@
+{% extends 'drinks/main.html' %}
+{% load static %}
+{%block title%}
+Customers Page
+{%endblock title%}
+
+{% block content %}
+<div class="tw-mt-24"></div>
+{% include 'drinks/dashboardCustomers.html'%}
+
+<div class="row tw-mx-1">
+    <div class=" col col-lg-12 tw-mb-2">
+            <div class="container tw-mb-5 tw-text-center tw-text-4xl md:tw-text-5xl tw-font-fam5 tw-font-black tw-text-yellow-600" id="parfait">
+                <h2>Customers</h2>
+            </div>
+            <div class="tw-w-full tw-mx-auto">
+                <div class="table-responsive">
+                    <table class="table table-striped"> <!-- could add table-sm-->
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Customer</th>
+                                <th scope="col">Email</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                {% for customer in customers%}
+                                
+                                <tr class="tw-font-bold tw-text-lg">
+                                    <td><a href="{% url 'customers' customer.slugCustomer %}" class="btn btn-outline-info tw-rounded-full">View</a></td>
+                                    <th scope="row">{{customer.name}}</th>
+                                    <td class="">{{customer.email}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="container tw-flex tw-justify-center tw-text-lg tw-my-4">
+		
+                {% if customers.has_other_pages %}
+        
+                    <ul class="pagination">
+        
+                        {% if customers.has_previous %}
+                            <li class="page-item tw-mr-1 "><a data-page="{{customers.previous_page_number}}" href="?page={{customers.previous_page_number}}" class="page-link">&laquo</a></li>
+        
+                            <li class="page-item tw-mr-1"><a data-page="1" href="?page=1" class="page-link  tw-rounded-md">First</a></li>
+                        {% endif %}
+                        
+                        {% for i in customers.paginator.page_range %}
+                            {% if customers.number == i %}
+                                <li class="page-item active tw-mr-1 "><a class="page-link  tw-rounded-md">{{i}}</a></li>
+                            {%elif i > customers.number|add:'-3' and i < customers.number|add:'3' %}
+                                <li class="page-item tw-mr-1"><a data-page="{{i}}" href="?page={{i}}" class="page-link  tw-rounded-md">{{i}}</a></li>
+                            {% endif %}
+                            
+                        {% endfor %}
+        
+        
+                        {% if customers.has_next %}
+                            <li class="page-item tw-mr-1"><a data-page="{{customers.paginator.num_pages}}" href="?page={{customers.paginator.num_pages}}" class="page-link  tw-rounded-md">Last</a></li>
+        
+                            <li class="page-item"><a data-page="{{customers.next_page_number}}" href="?page={{customers.next_page_number}}" class="page-link">&raquo</a></li>
+                        {% endif %}
+                    </ul>
+        
+                {% endif %}
+            </div>
+    </div>
+    {%endblock content%}

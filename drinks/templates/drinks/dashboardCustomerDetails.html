@@ -5,10 +5,14 @@
         <div class=" col-sm">
             <div class="card text-center m-3 tw-text-center tw-text-2xl md:tw-text-3xl tw-font-fam5 tw-font-black tw-shadow-lg tw-overflow-hidden" style="border-radius: 1.5rem;" id="total-orders">
                 <div class="card-header">
-                    <h5 class="card-title">Total Parfaits</h5>
+                    <h5 class="card-title">Contact Information</h5>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">{{productsCount}}</h3>
+                    <p class="tw-font-semibold tw-text-xl">Name: {{customers.name}}</p>
+                    <br>
+                    <p class="tw-font-semibold tw-text-xl">Email: {{customers.email}}</p>
+                    <br>
+                    <p class="tw-font-semibold tw-text-xl">Phone: {{customers.phone}}</p>
                 </div>
             </div>
         </div>
@@ -18,25 +22,25 @@
         <div class=" col-sm">
             <div class="card text-center m-3 tw-text-center tw-text-2xl md:tw-text-3xl tw-font-fam5 tw-font-black tw-shadow-lg tw-overflow-hidden" style="border-radius: 1.5rem;" id="orders-delivered">
                 <div class="card-header">
-                    <h5 class="card-title">Total Stock</h5>
+                    <h5 class="card-title">Total Orders</h5>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">{{totalStock}}</h3>
+                    <p class="tw-font-semibold tw-text-4xl">{{ordersCount}}</p>
                 </div>
             </div>
         </div>
     <!-- </div> -->
 
     <!-- <div class="col"> -->
-        <!-- <div class=" col-sm">
+        <div class=" col-sm">
             <div class="card text-center m-3 tw-text-center tw-text-2xl md:tw-text-3xl tw-font-fam5 tw-font-black tw-shadow-lg tw-overflow-hidden" style="border-radius: 1.5rem;" id="orders-pending">
                 <div class="card-header">
-                    <h5 class="card-title">Total Customers</h5>
+                    <h5 class="card-title">Total Payments</h5>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">{{customersCount}}</h3>
+                    <p class="tw-font-semibold tw-text-4xl">&#x20A6; {{totalPayment}}</p>
                 </div>
             </div>
-        </div> -->
+        </div>
     <!-- </div> -->
 </div>

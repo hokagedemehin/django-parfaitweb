@@ -1,14 +1,14 @@
 {% extends 'drinks/main.html' %}
 {% load static %}
 {%block title%}
-Orders Page
+Order Items Page
 {%endblock title%}
 
 {% block content %}
 <div class="tw-mt-24"></div>
-{% include 'drinks/dashboardOrders.html'%}
+{% include 'drinks/dashboardOrdersItem.html'%}
 <div class="container tw-mb-5 tw-text-center tw-text-4xl md:tw-text-5xl tw-font-fam5 tw-font-black tw-text-yellow-600" id="parfait">
-    <h2>Orders</h2>
+    <h2>Order Items</h2>
 </div>
 
 <div class="tw-bg-gray-200 tw-p-5 tw-text-center tw-mb-4 container-fluid" >
@@ -28,27 +28,26 @@ Orders Page
                     <th scope="col">Name</th>
                     <th scope="col">Order</th>
                     <th scope="col">Date Ordered</th>
-                    <!-- <th scope="col">Order Item</th> -->
+                    <th scope="col">Order Item</th>
+                    <th scope="col">Quantity</th>
                     <th scope="col">Price</th>
                     <th scope="col">Complete Payment</th>
                     <th scope="col">Delivery Status</th>
-                    <th scope="col">Update</th>
                 </tr>
             </thead>
             <tbody>
-                {% for item in orders%}
+                {% for item in orderItems%}
                 
                 <tr class="tw-font-bold tw-text-lg">
-                    <th scope="row">{{item.transaction_id}}</th>
-                    <td >{{item.customer.name}}</td>
-                    <td class="">{{item}}</td>
-                    <td>{{item.date_ordered | date:'M d, Y'}}</td>
-                    <td>{{item.get_cart_total}}</td>
-                    <td>{{item.complete}}</td>
-                    <td>{{item.status}}</td>
-                    <td><a href="{% url 'order-update' item.slugOrder %}" class="btn btn-outline-info tw-rounded-full">Update</a></td>
-                    <!-- <td>{{item.order.complete}}</td>
-                    <td>{{item.order.status}}</td> -->
+                    <th scope="row">{{item.order.transaction_id}}</th>
+                    <td >{{item.order.customer.name}}</td>
+                    <td class="">{{item.order}}</td>
+                    <td>{{item.date_added | date:'M d, Y'}}</td>
+                    <td>{{item.product.name}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.get_total}}</td>
+                    <td>{{item.order.complete}}</td>
+                    <td>{{item.order.status}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -58,30 +57,30 @@ Orders Page
 
     <div class="container tw-flex tw-justify-center tw-text-lg tw-my-4">
 		
-		{% if orders.has_other_pages %}
+		{% if orderItems.has_other_pages %}
 
 			<ul class="pagination">
 
-				{% if orders.has_previous %}
-					<li class="page-item tw-mr-1 "><a data-page="{{orders.previous_page_number}}" href="?page={{orders.previous_page_number}}" class="page-link">&laquo</a></li>
+				{% if orderItems.has_previous %}
+					<li class="page-item tw-mr-1 "><a data-page="{{orderItems.previous_page_number}}" href="?page={{orderItems.previous_page_number}}" class="page-link">&laquo</a></li>
 
 					<li class="page-item tw-mr-1"><a data-page="1" href="?page=1" class="page-link  tw-rounded-md">First</a></li>
                 {% endif %}
                 
-                {% for i in orders.paginator.page_range %}
-					{% if orders.number == i %}
+                {% for i in orderItems.paginator.page_range %}
+					{% if orderItems.number == i %}
 						<li class="page-item active tw-mr-1 "><a class="page-link  tw-rounded-md">{{i}}</a></li>
-                    {%elif i > orders.number|add:'-3' and i < orders.number|add:'3' %}
+                    {%elif i > orderItems.number|add:'-3' and i < orderItems.number|add:'3' %}
                         <li class="page-item tw-mr-1"><a data-page="{{i}}" href="?page={{i}}" class="page-link  tw-rounded-md">{{i}}</a></li>
 					{% endif %}
 					
 				{% endfor %}
 
 
-				{% if orders.has_next %}
-					<li class="page-item tw-mr-1"><a data-page="{{orders.paginator.num_pages}}" href="?page={{orders.paginator.num_pages}}" class="page-link  tw-rounded-md">Last</a></li>
+				{% if orderItems.has_next %}
+					<li class="page-item tw-mr-1"><a data-page="{{orderItems.paginator.num_pages}}" href="?page={{orderItems.paginator.num_pages}}" class="page-link  tw-rounded-md">Last</a></li>
 
-					<li class="page-item"><a data-page="{{orders.next_page_number}}" href="?page={{orders.next_page_number}}" class="page-link">&raquo</a></li>
+					<li class="page-item"><a data-page="{{orderItems.next_page_number}}" href="?page={{orderItems.next_page_number}}" class="page-link">&raquo</a></li>
 				{% endif %}
 			</ul>
 

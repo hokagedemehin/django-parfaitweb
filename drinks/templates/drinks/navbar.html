@@ -16,16 +16,36 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'parfait' %}">Parfait </a>
         </li>
-        {% if user.is_authenticated %}
-        {% if user.is_superuser %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'orderslist' %}">All Orders</a>
+          {% if user.is_superuser %}
+            <a class="nav-link" href="{% url 'all-customers' %}">Customers</a>
+          {% endif %}
         </li>
-        {% endif %}
-        {% endif %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Orders
+          </a>
+          <div class="dropdown-menu tw-bg-gray-500" style="width: fit-content;" aria-labelledby="navbarDropdown">
+          {% if user.is_authenticated %}
+          {% if user.is_superuser %}
+            <a class="dropdown-item" href="{% url 'orderItems-list' %}">All Order Items</a>
+            <a class="dropdown-item" href="{% url 'orders' %}">All Orders</a>
+          {% endif %}
+          {% endif %}
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'user-page' %}"> My Orders</a>
+          </div>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="">All Items</a>
+        </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'user-page' %}">My Orders</a>
+          <a class="nav-link" href="">All Orders</a>
         </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="">My Orders</a>
+        </li> -->
       </ul>
       <ul class="navbar-nav">
         {% if user.is_authenticated %}

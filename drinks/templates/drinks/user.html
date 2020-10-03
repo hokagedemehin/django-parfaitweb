@@ -25,7 +25,8 @@ My Orders
                     <th scope="col">Order Item</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Complete</th>
+                    <th scope="col">Complete Payment</th>
+                    <th scope="col">Delivery Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +41,7 @@ My Orders
                     <td>{{item.quantity}}</td>
                     <td>{{item.get_total}}</td>
                     <td>{{item.order.complete  }}</td>
+                    <td>{{item.order.status}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -77,17 +77,21 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    # STATUS = (
-    #     ('Pending', 'Pending'),
-    #     ('Delivered','Delivered'),
-    # )
+    Pend = 'Pending'
+    Road = 'Out for Delivery'
+    Deliv = 'Delivered'
+    STATUS = [
+        (Pend, 'Pending'),
+        (Road, 'Out for Delivery'),
+        (Deliv,'Delivered'),
+    ]
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True) 
     date_ordered = models.DateTimeField(auto_now_add=True)
     # ship = models.ForeignKey('ShippingAddress', on_delete=models.SET_NULL, null=True, blank=True)
     complete = models.BooleanField(default=False, null=True, blank=True)
-    transaction_id = models.CharField(max_length=100, null=True)
+    transaction_id = models.CharField(max_length=100, null=True, blank=True)
     slugOrder = models.SlugField(null=True, blank=True)
-    # status = models.CharField(max_length=100, null=True, blank=True, choices=STATUS)
+    status = models.CharField(max_length=100, null=True, blank=True, choices=STATUS,  default='Pending')
     
 
     def __str__(self):

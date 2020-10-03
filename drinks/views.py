@@ -249,12 +249,16 @@ def processOrder(request):
 @allowed_users(allowed_roles=['admin', 'staff'])
 def parfaitDetails(request):
     products = Product.objects.all()
+    productsCount = products.count()
+    totalStock = 0
+    for product in products:
+        totalStock += product.stock
     cartItems = cartData(request)['cartItems']
     ordersCount = Order.objects.all().count()
     customersCount = Customer.objects.all().count()
     delivered = Order.objects.filter(complete='True').count()
     customers = Customer.objects.all()
-    context={'products': products, 'customers': customers,'ordersCount': ordersCount,'customersCount': customersCount,'delivered': delivered, 'cartItems': cartItems}
+    context={'products': products,'totalStock': totalStock,'productsCount': productsCount, 'customers': customers,'ordersCount': ordersCount,'customersCount': customersCount,'delivered': delivered, 'cartItems': cartItems}
     return render(request, 'drinks/parfaits.html', context)
 
 
@@ -295,9 +299,48 @@ def parfaitCreate(request):
     context = {'form': form, 'cartItems': cartItems}
     return render(request, 'drinks/parfait_create.html', context)
 
+def allOrders(request):
+    orders = Order.objects.all().order_by('-date_ordered')
+    ordersCount = Order.objects.all().count()
+    delivered = Order.objects.filter(status='Delivered').count()
+    pendingCount = Order.objects.filter(status='Pending').count()
+    OutDeliveryCount = Order.objects.filter(status='Out for Delivery').count()
+    cartItems = cartData(request)['cartItems']
+    myFilter = OrderFilter(request.GET, queryset=orders)
+    orders = myFilter.qs
+    page = request.GET.get('page')
+    paginator = Paginator(orders, 10)
 
-def orderDetails(request):
-    orderItems = OrderItem.objects.all().order_by('order')
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
+    context = {'orders': orders, 'pendingCount':pendingCount,'OutDeliveryCount': OutDeliveryCount,'cartItems': cartItems, 'myFilter':myFilter,'ordersCount': ordersCount, 'delivered': delivered}
+    return render(request, 'drinks/orders.html', context)
+
+
+def OrdersDetails(request, slugOrder):
+    orderDetail = Order.objects.get(slugOrder = slugOrder)
+    cartItems = cartData(request)['cartItems']
+    name = orderDetail.customer.name
+    form = OrderForm(instance=orderDetail)
+
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=orderDetail)
+        if form.is_valid():
+            form.save()
+            return redirect('orders')
+    context = {'form': form, 'orderDetail':orderDetail, 'name': name, 'cartItems': cartItems}
+    return render(request, 'drinks/orders_detail.html', context)
+
+
+def orderItemsDetails(request):
+    orderItems = OrderItem.objects.all().order_by('-order')
+    orderItemCount = orderItems.count()
+    ordersCount = Order.objects.all().count()
+    pendingCount = Order.objects.filter(status='Pending').count()
     customers = Customer.objects.all()
     cartItems = cartData(request)['cartItems']
     myFilter = OrderItemFilter(request.GET,queryset=orderItems)
@@ -313,15 +356,43 @@ def orderDetails(request):
         orderItems = paginator.page(1)
     except EmptyPage:
         orderItems = paginator.page(paginator.num_pages)
-    context = {'orderItems': orderItems, 'customers': customers, 'cartItems': cartItems, 'myFilter':myFilter}
-    return render(request, 'drinks/orders.html', context)
+    context = {'orderItems': orderItems,'orderItemCount':orderItemCount ,'ordersCount':ordersCount ,'pendingCount':pendingCount,'customers': customers, 'cartItems': cartItems, 'myFilter':myFilter}
+    return render(request, 'drinks/orderItems.html', context)
+
+def customer(request):
+    customers = Customer.objects.all()
+    orders = Order.objects.all().filter(complete=True)
+    totalPayment = 0
+    for order in orders:
+        totalPayment += order.get_cart_total
+    customersCount = Customer.objects.all().count()
+    paymentsCount = Order.objects.filter(complete=True).count()
+    cartItems = cartData(request)['cartItems']
+
+    page = request.GET.get('page')
+    paginator = Paginator(customers, 5)
+
+    try:
+        customers = paginator.page(page)
+    except PageNotAnInteger:
+        customers = paginator.page(1)
+    except EmptyPage:
+        customers = paginator.page(paginator.num_pages)
+
+
+    context={'customers': customers,'totalPayment': totalPayment,'paymentsCount': paymentsCount,'customersCount': customersCount,'cartItems': cartItems}
+    return render(request, 'drinks/customer.html', context)
 
 
 def customerDetails(request, slugCustomer):
     customers = Customer.objects.get(slugCustomer=slugCustomer)
     ordersCount = Order.objects.all().filter(customer__name = customers.name).count()
     orders = customers.order_set.all()
-    orderItems = OrderItem.objects.filter(order__customer__name = customers.name)
+    orders1 = Order.objects.all().filter(customer__name = customers.name, complete=True)
+    totalPayment = 0
+    for order in orders1:
+        totalPayment += order.get_cart_total
+    orderItems = OrderItem.objects.filter(order__customer__name = customers.name).order_by('-date_added')
     myFilter = CustomerFilter(request.GET,queryset=orderItems)
     orderItems = myFilter.qs
     # ordersCount = orders.count()
@@ -340,7 +411,7 @@ def customerDetails(request, slugCustomer):
     except EmptyPage:
         orderItems = paginator.page(paginator.num_pages)
 
-    context = {'customers':customers,'orders':orders,'orderItems':orderItems,'ordersCount':ordersCount,'cartItems': cartItems, 'myFilter':myFilter}
+    context = {'customers':customers, 'totalPayment': totalPayment,'orders':orders,'orderItems':orderItems,'ordersCount':ordersCount,'cartItems': cartItems, 'myFilter':myFilter}
     
     return render(request, 'drinks/customer_details.html', context)
 
@@ -405,7 +476,7 @@ def userPage(request):
     total_orders = orders.count()
     delivered = orders.filter(complete=True).count()
     customers = Customer.objects.get(user = request.user)
-    orderItems = OrderItem.objects.filter(order__customer__name = customers.name)
+    orderItems = OrderItem.objects.filter(order__customer__name = customers.name).order_by('-order')
     myFilter = CustomerFilter(request.GET,queryset=orderItems)
     orderItems = myFilter.qs
 
