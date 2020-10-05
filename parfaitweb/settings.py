@@ -193,8 +193,8 @@ ADDED DJANGO_HEROKU IMPORT AT THE TOP AND CODE AT THE BOTTOM
 
 """
 
-# DEBUG = False
-DEBUG = True
+DEBUG = False
+# DEBUG = True
 
 
 import dj_database_url

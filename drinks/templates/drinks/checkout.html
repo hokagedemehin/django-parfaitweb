@@ -316,8 +316,8 @@ Check out
         },
         customer: {
           email: savedetails(),
-          phone_number: "08102909304",
-          name: name,
+          phone_number: "{{order.customer.phone}}",
+          name: '{{order.customer.name}}',
         },
         callback: (data) => { 
         console.log('payment completed', data)
